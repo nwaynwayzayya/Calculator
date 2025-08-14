@@ -1,0 +1,65 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: Gotham Rounded, sans-serif;
+    font-weight: normal;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(to right, #00AAFF, #00FF6C);
+}
+
+.calculator-grid {
+    display: grid;
+    justify-content: center;
+    /* We use align-content here because we want all the buttons to be in the center together */
+    /* If we use align-item, the buttons will be apart and there'll be gaps between the buttons */
+    align-content: center;
+    min-height: 100vh;
+    /* grid templates */
+    grid-template-columns: repeat(4, 100px);
+    /* minmax is for the first row, min is 120px and auto is for max value, because the numbers could grow longer and auto is to automatically make the row higher as the number grows */
+    /* minmax is for the first rown and the repeat is for the 5 rows below the first row */
+    grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+}
+
+.calculator-grid > button {
+    cursor: pointer;
+    font-size: 2rem;
+    border: 1px solid white;
+    outline: none;
+    background-color: rgba(255, 255, 255, .75);
+}
+
+.calculator-grid > button:hover {
+    background-color: rgba(255, 255, 255, .9);
+}
+
+.span-two {
+    grid-column: span 2;
+}
+
+.output {
+    /* the output will fill the entire width of the top row */
+    grid-column: 1/-1;
+    background-color: rgba(0, 0, 0, .75);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-around;
+    padding: 10px;
+    /* word-wrap:break-word breaks the word if the word is too long, breaks the line to another line instead of overflowing */
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.output .previous-operand {
+    color: rgba(255, 255, 255, .75);
+    font-size: 1.5rem;
+}
+
+.output .current-operand {
+    color: white;
+    font-size: 2.5rem;
+}
