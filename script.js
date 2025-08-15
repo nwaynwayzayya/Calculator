@@ -5,6 +5,7 @@ class Calculator {
     constructor(previousOperandTextElement, currentOperandTextElement) {
         this.previousOperandTextElement = previousOperandTextElement
         this.currentOperandTextElement = currentOperandTextElement
+        this.justComputed = false;
         // Clears the 'output' space as soon as the new calculator is created
         this.clear()
     }
@@ -15,6 +16,7 @@ class Calculator {
         this.currentOperand = ''
         this.previousOperand = ''
         this.operation = undefined;
+        this.justComputed = false;
     }
 
     delete() {
@@ -24,6 +26,11 @@ class Calculator {
     appendNumber(number) {
         // This will make sure the period or the dot is entered only one time in a number
         if (number === '.' && this.currentOperand.includes('.')) return
+
+        if (this.justComputed) {
+            this.currentOperand = ''
+            this.justComputed = false
+        }
 
         // This line will add a new number behind the first number everytime a button is clicked
         // .toString is used so that it will append behind the existing number
@@ -43,6 +50,7 @@ class Calculator {
         this.operation = operation
         this.previousOperand = this.currentOperand
         this.currentOperand = ''
+        this.justComputed = false;
     }
 
     compute() {
@@ -73,6 +81,7 @@ class Calculator {
         this.currentOperand = computation
         this.operation = undefined
         this.previousOperand = ''
+        this.justComputed = true;
     }
 
     // Function to display the number in the comma form like '55,555,555'
@@ -97,7 +106,7 @@ class Calculator {
     updateDisplay() {
         this.currentOperandTextElement.innerText = this.getDisplayNumber(this.currentOperand)
         // Add operation symbol after the previousOperand(the top one)
-        if (this.operation !== null && this.operation !== undefined) {
+        if (this.operation != null) {
             this.previousOperandTextElement.innerText = `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
         } else {
             this.previousOperandTextElement.innerText = ''
