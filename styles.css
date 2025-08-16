@@ -7,7 +7,18 @@
 body {
     padding: 0;
     margin: 0;
-    background: linear-gradient(to right, #00AAFF, #00FF6C);
+    height: 100vh;
+    background: #efe8d8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background-color: white;
+    display: inline-block;
+    padding: 20px; 
+    border-radius: 10px;
 }
 
 .calculator-grid {
@@ -16,24 +27,53 @@ body {
     /* We use align-content here because we want all the buttons to be in the center together */
     /* If we use align-item, the buttons will be apart and there'll be gaps between the buttons */
     align-content: center;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     /* grid templates */
-    grid-template-columns: repeat(4, 100px);
+    grid-template-columns: repeat(4, 60px);
     /* minmax is for the first row, min is 120px and auto is for max value, because the numbers could grow longer and auto is to automatically make the row higher as the number grows */
     /* minmax is for the first rown and the repeat is for the 5 rows below the first row */
-    grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+    grid-template-rows: minmax(120px, auto) repeat(5, 60px);
+    gap: 20px;
 }
 
 .calculator-grid > button {
     cursor: pointer;
-    font-size: 2rem;
-    border: 1px solid white;
+    font-size: 1.7rem;
+    color: #725c3f;
+    border: none;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     outline: none;
-    background-color: rgba(255, 255, 255, .75);
+}
+
+.calculator-grid > button[data-number] {
+    background-color: white;
+
+}
+
+.calculator-grid > button[data-equals] {
+    background-color: #725c3f;
+    color: white;
+}
+
+.calculator-grid > button[data-all-clear],
+.calculator-grid > button[data-operation],
+.calculator-grid > button[data-delete] {
+    background-color: #f6e3c5;
 }
 
 .calculator-grid > button:hover {
-    background-color: rgba(255, 255, 255, .9);
+    background-color: #edeae3;
+}
+
+.calculator-grid > button[data-operation]:hover,
+.calculator-grid > button[data-all-clear]:hover,
+.calculator-grid > button[data-delete]:hover {
+    background-color: #edc98d;
+}
+
+.calculator-grid > button[data-equals]:hover {
+    background-color: #9c7f59;
 }
 
 .span-two {
@@ -43,19 +83,21 @@ body {
 .output {
     /* the output will fill the entire width of the top row */
     grid-column: 1/-1;
-    background-color: rgba(0, 0, 0, .75);
+    background-color: #e5ada8;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     justify-content: space-around;
     padding: 10px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     /* word-wrap:break-word breaks the word if the word is too long, breaks the line to another line instead of overflowing */
     word-wrap: break-word;
     word-break: break-all;
 }
 
 .output .previous-operand {
-    color: rgba(255, 255, 255, .75);
+    color: rgba(255, 255, 255, 0.766);
     font-size: 1.5rem;
 }
 
